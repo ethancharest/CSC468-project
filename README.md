@@ -5,7 +5,7 @@ This project is a containerized web application that demonstrates a simple but r
 
 The purpose of this project is to explore container orchestration, service isolation, and inter-container communication while building a foundation that can be incrementally extended throughout the semester.
 
-System Architecture
+**System Architecture**
 
 Component Overview:
 
