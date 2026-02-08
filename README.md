@@ -4,13 +4,13 @@
 
 This project is a containerized web application that demonstrates a simple but realistic frontend–backend architecture using Docker. The system consists of two components: a static website served by Nginx and a backend API service. The frontend communicates with the backend using HTTP requests, with Nginx acting as a reverse proxy.
 
-The purpose of this project is to explore container orchestration, service isolation, and inter-container communication while building a foundation that can be incrementally extended throughout the semester.
+The purpose of this project is to explore container orchestration, service isolation, and inter-container communication while building a foundation.
 
 ## System Architecture
 ------------------------------
 ![System Architecture Diagram](docs/architecture.png)
 
-Component Overview:
+### Component Overview:
 
 Frontend (Nginx): Serves static HTML, CSS, and JavaScript content to the user.
 
@@ -24,7 +24,6 @@ Communication: The frontend sends REST API requests that are routed by Nginx to 
 This project will be implemented using Docker and Docker Compose to manage multiple containers and their networking.
 
 ### Planned base images:
-------------------------------
 
 Frontend: nginx:alpine <br>
 Chosen for its lightweight footprint and suitability for serving static files and acting as a reverse proxy.
