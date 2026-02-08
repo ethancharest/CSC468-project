@@ -47,6 +47,6 @@ The project structure allows for future enhancements such as databases, caching,
 
 ## Professional Resume
 
-![Professional Resume](docs/resume.png)
+![Professional Resume](resume/resume.png)
 <img src="docs/resume.png" width="800"/>
 
