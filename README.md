@@ -8,6 +8,7 @@ The purpose of this project is to explore container orchestration, service isola
 
 ## System Architecture
 ------------------------------
+![System Architecture Diagram](docs/architecture.png)
 
 Component Overview:
 
@@ -25,10 +26,10 @@ This project will be implemented using Docker and Docker Compose to manage multi
 ### Planned base images:
 ------------------------------
 
-Frontend: nginx:alpine
+Frontend: nginx:alpine <br>
 Chosen for its lightweight footprint and suitability for serving static files and acting as a reverse proxy.
 
-Backend API: python:3.x-slim
+Backend API: python:3.x-slim <br>
 Chosen to implement a simple REST API using a lightweight Python web framework such as Flask or FastAPI.
 
 ### Design considerations:
