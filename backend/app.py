@@ -4,22 +4,19 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# Health check endpoint - useful for verifying the backend is reachable
 @app.route('/api/health')
 def health():
     return jsonify({
         "status": "ok",
-        "message": "Backend is running"
+        "message": "Backend is running, API is healthy."
     })
 
-# Sample data endpoint - frontend will fetch and display this
 @app.route('/api/data')
 def data():
     return jsonify({
-        "project": "CSC468-project",
+        "project": "CSC468 Project",
         "stack": ["Nginx", "Flask", "Docker"],
-        "message": "Hello from the backend!"
+        "message": "Sample response from the backend API. Hello!"
     })
 
-# Always run - no __main__ check
 app.run(host='0.0.0.0', port=5000)
