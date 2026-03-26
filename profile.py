@@ -39,8 +39,8 @@ node.addService(rspec.Execute(shell="/bin/sh", command="sudo systemctl enable do
 # Clone the project repository into the default user's home directory
 node.addService(rspec.Execute(shell="/bin/sh", command="git clone https://github.com/ethancharest/CSC468-project.git $HOME/project"))
 
-# Start both containers in detached mode using a single chained command
-node.addService(rspec.Execute(shell="/bin/sh", command="cd $HOME/project && sudo docker compose up -d --build"))
+# Start both containers using absolute path to docker-compose.yml
+node.addService(rspec.Execute(shell="/bin/sh", command="sudo docker compose -f $HOME/project/docker-compose.yml up -d --build"))
 
 # Verify both containers are running (output visible in CloudLab logs)
 node.addService(rspec.Execute(shell="/bin/sh", command="sudo docker ps"))

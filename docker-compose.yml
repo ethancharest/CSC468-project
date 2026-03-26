@@ -11,8 +11,6 @@ services:
 
   backend:
     build: ./backend
-    environment:
-      - FLASK_APP=app.py
     expose:
       - "5000"
     networks:
