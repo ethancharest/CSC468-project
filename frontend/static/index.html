@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC468 Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CSC468 Project</h1>
+        <p class="subtitle">Static Site + API Architecture</p>
+
+        <!-- Health check section -->
+        <div class="card">
+            <h2>Backend Status</h2>
+            <p id="health-status">Checking...</p>
+        </div>
+
+        <!-- Data fetch section -->
+        <div class="card">
+            <h2>Data from API</h2>
+            <ul id="stack-list">
+                <li>Loading...</li>
+            </ul>
+            <p id="api-message"></p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
