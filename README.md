@@ -6,7 +6,7 @@ Built to get hands-on with Docker, container networking, and cloud infrastructur
 
 ## How it works
 
-![System Architecture Diagram](docs/architecture.png)
+![System Architecture Diagram](docs/architecture.svg)
 
 - **Frontend (Nginx):** Serves the static HTML, CSS, and JS. Also acts as a reverse proxy — any request to `/api/` gets forwarded to the backend.
 - **Backend (Flask):** A simple Python API running on port 5000. Not exposed to the outside world — only reachable through Nginx.
