@@ -70,6 +70,72 @@ docker compose down
 3. Wait for the VM to boot — Docker and the containers start automatically
 4. Open `http://<node-public-ip>` in your browser
 
+## Build Process
+ 
+Both services have their own `Dockerfile`.
+ 
+**Backend (`backend/Dockerfile`)**
+ 
+```dockerfile
+FROM python:3.11-slim
+```
+`python:3.11-slim` is the official lightweight Python image. Chosen because it's significantly smaller than `python:3.11-slim` and builds faster.
+ 
+```dockerfile
+WORKDIR /app
+```
+Sets the working directory inside the container to `/app`. All subsequent commands run from here.
+ 
+```dockerfile
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+```
+Copies `requirements.txt` first and installs dependencies before copying the rest of the code. This skips the pip install on rebuilds and saves time.
+ 
+```dockerfile
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+```
+Installs `curl` so Docker can run the healthcheck against `/api/health` to know when Flask is ready before starting Nginx.
+ 
+```dockerfile
+COPY . .
+EXPOSE 5000
+ENV FLASK_APP=app.py
+CMD ["python", "app.py"]
+```
+Copies the rest of the code in, exposes port 5000 internally, tells Flask which file is the app entry point, and starts it.
+ 
+---
+ 
+**Frontend (`frontend/Dockerfile`)**
+ 
+```dockerfile
+FROM nginx:alpine
+```
+`nginx:alpine` is the official lightweight Nginx image which is fine for serving static files and proxying.
+ 
+```dockerfile
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/
+```
+Removes Nginx's default config and adds custom config.
+ 
+```dockerfile
+COPY static/ /usr/share/nginx/html/
+```
+Copies the static files into the directory Nginx serves from by default.
+ 
+## Networking
+ 
+Both containers are on a Docker bridge network called `app-network`. Docker automatically handles DNS resolution by container name, so `nginx.conf` can reference the backend directly:
+ 
+```nginx
+proxy_pass http://backend:5000;
+```
+ 
+The backend uses `expose` instead of `ports` so port 5000 is only accessible to other containers on the network. The only entry point from outside is Nginx on port 80.
+
+
 ## Resume
 
 ![Professional Resume](resume/resume.png)
