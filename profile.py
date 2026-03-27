@@ -36,13 +36,11 @@ node.addService(rspec.Execute(shell="/bin/sh", command="sudo apt install -y dock
 # Enable and start Docker daemon
 node.addService(rspec.Execute(shell="/bin/sh", command="sudo systemctl enable docker && sudo systemctl start docker"))
 
-node.addService(rspec.Execute(shell="/bin/sh", command="whoami > /tmp/startup-user.txt && echo $HOME >> /tmp/startup-user.txt"))
+# Clone from GitHub Repository
+node.addService(rspec.Execute(shell="/bin/sh", command="git clone https://github.com/ethancharest/CSC468-project.git /users/geniuser/project"))
 
-# Clone the project repository into the default user's home directory
-node.addService(rspec.Execute(shell="/bin/sh", command="git clone https://github.com/ethancharest/CSC468-project.git /users/$(whoami)/project"))
-
-# Start both containers using absolute path to docker-compose.yml
-node.addService(rspec.Execute(shell="/bin/sh", command="sudo docker compose -f /users/$(whoami)/project/docker-compose.yml up -d --build"))
+# Docker Compose
+node.addService(rspec.Execute(shell="/bin/sh", command="sudo docker compose -f /users/geniuser/project/docker-compose.yml up -d --build"))
 
 # Verify both containers are running (output visible in CloudLab logs)
 node.addService(rspec.Execute(shell="/bin/sh", command="sudo docker ps"))
