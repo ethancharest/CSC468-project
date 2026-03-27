@@ -36,6 +36,8 @@ node.addService(rspec.Execute(shell="/bin/sh", command="sudo apt install -y dock
 # Enable and start Docker daemon
 node.addService(rspec.Execute(shell="/bin/sh", command="sudo systemctl enable docker && sudo systemctl start docker"))
 
+node.addService(rspec.Execute(shell="/bin/sh", command="whoami > /tmp/startup-user.txt && echo $HOME >> /tmp/startup-user.txt"))
+
 # Clone the project repository into the default user's home directory
 node.addService(rspec.Execute(shell="/bin/sh", command="git clone https://github.com/ethancharest/CSC468-project.git /users/$(whoami)/project"))
 
