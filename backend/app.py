@@ -1,5 +1,8 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+import socket
+import sys
+import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -17,6 +20,11 @@ def data():
         "project": "CSC468 Project",
         "stack": ["Nginx", "Flask", "Docker"],
         "message": "Sample response from the backend API. Hello!"
+        "container": {
+            "hostname": socket.gethostname(),
+            "python_version": sys.version.split(" ")[0],
+            "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
+        }
     })
 
 app.run(host='0.0.0.0', port=5000)
