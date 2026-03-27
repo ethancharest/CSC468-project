@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+﻿from flask import Flask, jsonify
 from flask_cors import CORS
 import socket
 import sys
@@ -19,7 +19,7 @@ def data():
     return jsonify({
         "project": "CSC468 Project",
         "stack": ["Nginx", "Flask", "Docker"],
-        "message": "Sample response from the backend API. Hello!"
+        "message": "Sample response from the backend API. Hello!",
         "container": {
             "hostname": socket.gethostname(),
             "python_version": sys.version.split(" ")[0],
