@@ -18,6 +18,7 @@
       - DB_NAME=csc468
       - DB_USER=csc468user
       - DB_PASSWORD=csc468pass
+      - ENV
     depends_on:
       db:
         condition: service_healthy
