@@ -23,69 +23,59 @@
             </div>
         </div>
     </header>
-
     <main class="container">
-
         <div class="hero">
             <p class="hero-label">Static Site + API Architecture</p>
             <h1>Container Dashboard</h1>
-            <p class="hero-sub">Nginx frontend · Flask backend · Docker network</p>
+            <p class="hero-sub">Nginx frontend · Flask backend · PostgreSQL · Docker network</p>
         </div>
-
         <div class="grid">
-
-            <!-- Backend Status -->
             <div class="card card--status">
                 <div class="card-header">
                     <span class="card-label">Backend Status</span>
-                    <span class="card-icon">◎</span>
                 </div>
                 <p id="health-status" class="status-text">Checking...</p>
+                <p id="db-status" class="db-status"></p>
+                <p id="uptime" class="uptime"></p>
             </div>
-
-            <!-- Stack -->
-            <div class="card card--stack">
-                <div class="card-header">
-                    <span class="card-label">Stack</span>
-                    <span class="card-icon">⬡</span>
-                </div>
-                <ul id="stack-list">
-                    <li class="skeleton"></li>
-                    <li class="skeleton"></li>
-                    <li class="skeleton"></li>
-                </ul>
-                <p id="api-message" class="api-message"></p>
-            </div>
-
-            <!-- Container Info -->
-            <div class="card card--info">
+            <div class="card card--info-small">
                 <div class="card-header">
                     <span class="card-label">Container Info</span>
-                    <span class="card-icon">⬡</span>
                 </div>
                 <div class="info-grid">
                     <div class="info-row">
                         <span class="info-label">Hostname</span>
-                        <span id="container-hostname" class="info-value mono">—</span>
+                        <span id="container-hostname" class="info-value mono">-</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Python</span>
-                        <span id="container-python" class="info-value mono">—</span>
+                        <span id="container-python" class="info-value mono">-</span>
                     </div>
                     <div class="info-row">
-                        <span class="info-label">Served at</span>
-                        <span id="container-timestamp" class="info-value mono">—</span>
+                        <span class="info-label">Environment</span>
+                        <span id="environment" class="info-value mono">-</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Response time</span>
-                        <span id="response-time" class="info-value mono">—</span>
+                        <span id="response-time" class="info-value mono">-</span>
                     </div>
                 </div>
             </div>
-
+            <div class="card card--log">
+                <div class="card-header">
+                    <span class="card-label">Persistent Log</span>
+                </div>
+                <ul id="entries-list">
+                    <li class="skeleton"></li>
+                    <li class="skeleton"></li>
+                </ul>
+                <div class="add-form">
+                    <textarea id="entry-content" class="form-textarea" placeholder="Write a log entry..."></textarea>
+                    <button id="add-btn" class="form-btn">Add</button>
+                </div>
+            </div>
         </div>
     </main>
-
     <script src="app.js"></script>
 </body>
 </html>
