@@ -23,13 +23,18 @@
             </div>
         </div>
     </header>
+
     <main class="container">
+
         <div class="hero">
             <p class="hero-label">Static Site + API Architecture</p>
             <h1>Container Dashboard</h1>
             <p class="hero-sub">Nginx frontend · Flask backend · Docker network</p>
         </div>
+
         <div class="grid">
+
+            <!-- Backend Status -->
             <div class="card card--status">
                 <div class="card-header">
                     <span class="card-label">Backend Status</span>
@@ -37,6 +42,8 @@
                 </div>
                 <p id="health-status" class="status-text">Checking...</p>
             </div>
+
+            <!-- Stack -->
             <div class="card card--stack">
                 <div class="card-header">
                     <span class="card-label">Stack</span>
@@ -49,6 +56,8 @@
                 </ul>
                 <p id="api-message" class="api-message"></p>
             </div>
+
+            <!-- Container Info -->
             <div class="card card--info">
                 <div class="card-header">
                     <span class="card-label">Container Info</span>
@@ -57,24 +66,26 @@
                 <div class="info-grid">
                     <div class="info-row">
                         <span class="info-label">Hostname</span>
-                        <span id="container-hostname" class="info-value mono">-</span>
+                        <span id="container-hostname" class="info-value mono">—</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Python</span>
-                        <span id="container-python" class="info-value mono">-</span>
+                        <span id="container-python" class="info-value mono">—</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Served at</span>
-                        <span id="container-timestamp" class="info-value mono">-</span>
+                        <span id="container-timestamp" class="info-value mono">—</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">Response time</span>
-                        <span id="response-time" class="info-value mono">-</span>
+                        <span id="response-time" class="info-value mono">—</span>
                     </div>
                 </div>
             </div>
+
         </div>
     </main>
+
     <script src="app.js"></script>
 </body>
 </html>

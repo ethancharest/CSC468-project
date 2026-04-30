@@ -18,18 +18,18 @@ Built to get hands-on with Docker, container networking, and cloud infrastructur
 |-------|-----------|-----|
 | Frontend server | Nginx (alpine) | Lightweight, good for static files and proxying |
 | Backend API | Python 3.11 + Flask | Simple and easy to work with for a project this size |
-| Orchestration | Docker Compose | Handles networking, startup order, and service config |
+| Composition | Docker Compose | Handles networking, startup order, and service config |
 | Infrastructure | CloudLab (XenVM) | Provisioned via `profile.py` using the GENI RSpec API |
 
 ## Project Structure
 
 ```
 CSC468-project/
-├── profile.py              # CloudLab infrastructure profile
-├── docker-compose.yml      # Service orchestration
+├── profile.py              // CloudLab infrastructure profile
+├── docker-compose.yml      // Service orchestration
 ├── frontend/
 │   ├── Dockerfile
-│   ├── nginx.conf          # Reverse proxy config
+│   ├── nginx.conf          // Reverse proxy config
 │   └── static/
 │       ├── index.html
 │       ├── style.css
@@ -37,7 +37,7 @@ CSC468-project/
 └── backend/
     ├── Dockerfile
     ├── requirements.txt
-    └── app.py              # Flask API
+    └── app.py              // Flask API
 ```
 
 ## API Endpoints
@@ -49,7 +49,7 @@ CSC468-project/
 
 ## Running it locally
 
-You'll need Docker Desktop installed.
+You'll need Docker Desktop.
 
 ```bash
 git clone https://github.com/ethancharest/CSC468-project.git
@@ -67,7 +67,7 @@ docker compose down
 
 1. Log into [CloudLab](https://cloudlab.us)
 2. Create a new experiment using `profile.py`
-3. Wait for the VM to boot — Docker and the containers start automatically
+3. Wait for the VM to boot — Docker installs and containers start automatically
 4. Open `http://<node-public-ip>` in your browser
 
 ## Build Process
@@ -79,7 +79,7 @@ Both services have their own `Dockerfile`.
 ```dockerfile
 FROM python:3.11-slim
 ```
-`python:3.11-slim` is the official lightweight Python image. Chosen because it's significantly smaller than `python:3.11-slim` and builds faster.
+`python:3.11-slim` is the official lightweight Python image. Chosen because it's significantly smaller than `python:3.11` and builds faster.
  
 ```dockerfile
 WORKDIR /app

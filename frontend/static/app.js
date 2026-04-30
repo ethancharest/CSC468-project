@@ -1,11 +1,13 @@
-﻿async function checkHealth() {
+async function checkHealth() {
     const healthStatus = document.getElementById('health-status');
     const badge = document.getElementById('system-status');
+
     try {
         const response = await fetch('/api/health');
         const data = await response.json();
         healthStatus.textContent = data.message;
         healthStatus.classList.add('ok');
+        badge.textContent = '';
         badge.innerHTML = '<span class="pulse"></span> Online';
         badge.classList.add('online');
     } catch (error) {
@@ -27,12 +29,18 @@ async function fetchData() {
         const response = await fetch('/api/data');
         const data = await response.json();
         const elapsed = Math.round(performance.now() - start);
-        stackList.innerHTML = data.stack.map(item => '<li>' + item + '</li>').join('');
+
+        stackList.innerHTML = data.stack
+            .map(item => `<li>${item}</li>`)
+            .join('');
+
         apiMessage.textContent = data.message;
+
         hostname.textContent = data.container.hostname;
         python.textContent = data.container.python_version;
         timestamp.textContent = new Date(data.container.timestamp).toLocaleTimeString();
-        responseTime.textContent = elapsed + 'ms';
+        responseTime.textContent = `${elapsed}ms`;
+
     } catch (error) {
         stackList.innerHTML = '<li>Failed to load</li>';
         apiMessage.textContent = 'Could not reach the backend API.';
