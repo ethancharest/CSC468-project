@@ -9,14 +9,14 @@ node = request.XenVM("docker-host")
 # Ubuntu 22.04 LTS - stable, well-supported for Docker
 node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD"
 
-# Allocate 2 vCPUs - sufficient for Nginx + Flask/FastAPI under light/moderate load
+# Allocate 2 vCPUs - sufficient for Nginx + Flask under light/moderate load
 node.cores = 2
 
 # Allocate 4GB RAM:
 #   ~500MB  OS baseline
 #   ~300MB  Docker daemon overhead
 #   ~50MB   Nginx alpine container
-#   ~250MB  Python slim + Flask/FastAPI container
+#   ~250MB  Python slim + Flask container
 #   ~900MB  Total expected usage
 #   ~4GB    Allocated (headroom for future DB, cache, auth, monitoring)
 node.ram = 4096  # MB
@@ -25,28 +25,22 @@ node.ram = 4096  # MB
 node.routable_control_ip = "true"
 
 # ---- Startup Commands ----
+# All commands run as root via sudo, sequentially on the node after boot.
 
 # Update package index
-node.addService(rspec.Execute(shell="/bin/sh", command="sudo apt update"))
+node.addService(rspec.Execute(shell="/bin/sh", command="sudo apt update -y"))
 
-# Install Docker
-node.addService(rspec.Execute(shell="/bin/sh", command="sudo apt install -y docker.io"))
-
-# Install Docker Compose (v2 plugin)
-node.addService(rspec.Execute(shell="/bin/sh", command="sudo apt install -y docker-compose-v2"))
+# Install Docker and Docker Compose v2 in one step
+node.addService(rspec.Execute(shell="/bin/sh", command="sudo apt install -y docker.io docker-compose-v2"))
 
 # Enable and start Docker daemon
-node.addService(rspec.Execute(shell="/bin/sh", command="sudo systemctl enable docker"))
-node.addService(rspec.Execute(shell="/bin/sh", command="sudo systemctl start docker"))
+node.addService(rspec.Execute(shell="/bin/sh", command="sudo systemctl enable docker && sudo systemctl start docker"))
 
-# Add the default user to the docker group (avoids needing sudo for docker commands)
-node.addService(rspec.Execute(shell="/bin/sh", command="sudo usermod -aG docker $USER"))
+# Clone the project repository into the default user's home directory
+node.addService(rspec.Execute(shell="/bin/sh", command="git clone https://github.com/ethancharest/CSC468-project.git $HOME/project"))
 
-# Clone your project repository
-node.addService(rspec.Execute(shell="/bin/sh", command="git clone https://github.com/ethancharest/CSC468-project.git /home/user/project"))
-
-# Move into project directory and start services with Docker Compose
-node.addService(rspec.Execute(shell="/bin/sh", command="cd /home/user/project && sudo docker compose up -d"))
+# Start both containers using absolute path to docker-compose.yml
+node.addService(rspec.Execute(shell="/bin/sh", command="sudo docker compose -f $HOME/project/docker-compose.yml up -d --build"))
 
 # Verify both containers are running (output visible in CloudLab logs)
 node.addService(rspec.Execute(shell="/bin/sh", command="sudo docker ps"))
