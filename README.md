@@ -163,3 +163,7 @@ Docker Compose starts the containers in dependency order:
 3. Nginx starts and begins serving traffic
 
 This prevents Flask from crashing trying to connect to a database that isn't ready yet.
+
+## Resume
+
+[View Resume (PDF)](resume/resume.pdf)
